@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">IP Calculation</string>
+    <string name="tab_text_1">Subnet\nRechner</string>
+    <string name="tab_text_2">VLSM\nRechner</string>
+    <string name="tab_text_3">Mask\nRechner</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_label">IPv4 network address</string>
+    <string name="dot">.</string>
+    <string name="slash">/</string>
+
+    <string name="label_network">Netzwerk:</string>
+    <string name="label_subnet_mask">Subnetzmaske:</string>
+    <string name="label_hosts_range">Host-Bereich:</string>
+    <string name="label_Broadcast">Broadcast:</string>
+    <string name="label_netSize">Verfügbare Hosts:</string>
+    <string name="res_network">%1$s &lt;b> %2$s &lt;/b></string>
+    <string name="res_net_size_req">Erforderlich: &lt;b>%1$d &lt;/b></string>
+    <string name="res_net_size_alloc">Zugeteilt: &lt;b>%1$ d&lt;/b> (%2$d%%)</string>
+
+    <string name="button_configure_net"><u>Netzwerke konfigurieren</u></string>
+    <string name="button_negative">Stornieren</string>
+    <string name="button_positive">Berechnen</string>
+    <string name="label_net_conf_d_title">Netzwerke konfigurieren</string>
+    <string name="net_conf_dialog">net_config_dialog</string>
+
+    <string name="hint_net_size">Size</string>
+    <string name="delete_net_button">delete net button</string>
+    <string name="network_name">network name</string>
+    <string name="_192">192</string>
+    <string name="_168">168</string>
+    <string name="_0">0</string>
+    <string name="_100">100</string>
+    <string name="_24">24</string>
+    <string name="clear_button">clear button</string>
+    <string name="wildcard_mask">Wildcard Maske:</string>
+    <string name="mask_cidr">Masken CIDR:</string>
+    <string name="slash_mask">/%1$d</string>
+    <string name="label_subnet_wildcard_mask">Wildcard Maske:</string>
+    <string name="action_about">about</string>
+
+
+
+    <string name="copyright"> copyright\n  &lt; Diab 2023>\n all rights reserved</string>
+    <string name="about">app developed by diab</string>
+    <string name="add_new_network">Add New Network</string>
+
+
+</resources>

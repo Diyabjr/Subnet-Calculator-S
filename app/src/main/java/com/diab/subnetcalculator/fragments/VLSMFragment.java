@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import com.diab.subnetcalculator.MainActivity;
 import com.diab.subnetcalculator.R;
-import com.diab.subnetcalculator.model.NetworkManager;
+import com.diab.subnetcalculator.model.NetzwerkManager;
 import com.diab.subnetcalculator.fragments.dialog.NetConfigDialog;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     private ListView dLösungListView;
 
     private HashMap<String,Integer> dSubNetsMappe;
-    private List<NetworkManager.Subnet> dLösungSubNets;
+    private List<NetzwerkManager.Subnet> dLösungSubNets;
     private String dMajorNetwork;
 
 
@@ -190,7 +190,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                         + dIpAddresseEditText[2].getText().toString()+"."
                         + dIpAddresseEditText[3].getText().toString()+"/"
                         + dIpMaskeEditText.getText().toString();
-                if(NetworkManager.checkIfValidNetworkAddress(dMajorNetwork)){
+                if(NetzwerkManager.checkIfValidNetworkAddress(dMajorNetwork)){
                     öffneNetConfig();
                 }else Snackbar.make(view, "Major Network Address not valid", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -236,18 +236,18 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     @Override
     public void anwendeNetzwerkeMap(HashMap<String, Integer> subNetsMap) {
         dSubNetsMappe = subNetsMap;
-        dLösungSubNets = NetworkManager.calcVLSM(dMajorNetwork, dSubNetsMappe);
+        dLösungSubNets = NetzwerkManager.berechneVLSM(dMajorNetwork, dSubNetsMappe);
         SubnetLösungAdapter subnetLösungAdapter = new SubnetLösungAdapter(getContext(),R.layout.subnet_losung, dLösungSubNets);
         dLösungListView.setAdapter(subnetLösungAdapter);
         dLösungListView.setVisibility(View.VISIBLE);
 
     }
-    private class SubnetLösungAdapter extends ArrayAdapter<NetworkManager.Subnet>{
+    private class SubnetLösungAdapter extends ArrayAdapter<NetzwerkManager.Subnet>{
         private Context dKontext;
         private int dResource;
-        private List<NetworkManager.Subnet> dSubNetList;
+        private List<NetzwerkManager.Subnet> dSubNetList;
 
-        SubnetLösungAdapter(Context context, int resource, List<NetworkManager.Subnet> subNetList) {
+        SubnetLösungAdapter(Context context, int resource, List<NetzwerkManager.Subnet> subNetList) {
             super(context, resource, subNetList);
             dKontext = context;
             dResource = resource;
@@ -262,7 +262,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
 
         @NonNull
         @Override
-        public NetworkManager.Subnet getItem(int position) {
+        public NetzwerkManager.Subnet getItem(int position) {
             return dSubNetList.get(position);
         }
 
@@ -282,12 +282,12 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 TextView resNetSizeAllocatedTextView     = convertView.findViewById(R.id.resNetSizeAllocatedTextView);
 
                 curResNetworkNameTextView.setText(getItem(position).name);
-                currNetworkTextView.setText(Html.fromHtml((getString(R.string.res_network,getItem(position).address,getItem(position).maskCIDR))));
-                currNetHostsRangeTextView.setText(getItem(position).range);
+                currNetworkTextView.setText(Html.fromHtml((getString(R.string.res_network,getItem(position).addresse,getItem(position).maskeCIDR))));
+                currNetHostsRangeTextView.setText(getItem(position).bereich);
                 CurrNetBroadcastTextView.setText(getItem(position).broadcast);
-                int percentage = (int)(((float)getItem(position).neededSize / (float)getItem(position).allocatedSize)*100);
-                currNetSizeRequiredTextView.setText(Html.fromHtml(getString(R.string.res_net_size_req,getItem(position).neededSize)));
-                resNetSizeAllocatedTextView.setText(Html.fromHtml(getString(R.string.res_net_size_alloc,getItem(position).allocatedSize,percentage)));
+                int percentage = (int)(((float)getItem(position).benötigteGröße / (float)getItem(position).zugeteileteGröße)*100);
+                currNetSizeRequiredTextView.setText(Html.fromHtml(getString(R.string.res_net_size_req,getItem(position).benötigteGröße)));
+                resNetSizeAllocatedTextView.setText(Html.fromHtml(getString(R.string.res_net_size_alloc,getItem(position).zugeteileteGröße,percentage)));
             }catch (NullPointerException e){
                 Log.e("Exception", Log.getStackTraceString(e));
             }

@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diab.subnetcalculator.R;
-import com.diab.subnetcalculator.model.NetworkManager;
+import com.diab.subnetcalculator.model.NetzwerkManager;
 
 public class SubnetFragment extends Fragment {
     private EditText[] dIpAddressEditText;
@@ -211,14 +211,14 @@ public class SubnetFragment extends Fragment {
                     + dIpAddressEditText[2].getText().toString() + "."
                     + dIpAddressEditText[3].getText().toString() + "/"
                     + dIpMaskeEditText.getText().toString();
-            NetworkManager.Subnet mIpNetwork = new NetworkManager.Subnet(ipAddress);
+            NetzwerkManager.Subnet mIpNetwork = new NetzwerkManager.Subnet(ipAddress);
             int mask = Integer.valueOf(dIpMaskeEditText.getText().toString());
 
-            String networkAddress = mIpNetwork.address;
-            String networkRange = mIpNetwork.range;
+            String networkAddress = mIpNetwork.addresse;
+            String networkRange = mIpNetwork.bereich;
             String networkBroadcast = mIpNetwork.broadcast;
-            String networkAllocatedSize = String.valueOf(mIpNetwork.allocatedSize);
-            String wildcardMask = NetworkManager.toDecWildCardMask(mask);
+            String networkAllocatedSize = String.valueOf(mIpNetwork.zugeteileteGröße);
+            String wildcardMask = NetzwerkManager.toDecWildCardMaske(mask);
             if (mask == 0) {
                 networkAddress = "0.0.0.0";
                 networkRange = "0.0.0.0 - 255.255.255.254";

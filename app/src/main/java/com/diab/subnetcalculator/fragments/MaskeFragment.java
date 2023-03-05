@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.diab.subnetcalculator.R;
-import com.diab.subnetcalculator.model.NetworkManager;
+import com.diab.subnetcalculator.model.NetzwerkManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +34,16 @@ public class MaskeFragment extends Fragment {
 
     private void ergebnisAktualisierenView(int mask){
         try {
-            String netSize = String.valueOf(NetworkManager.findUsableHosts(mask));
+            String netSize = String.valueOf(NetzwerkManager.findeNutzbareHosts(mask));
             if(mask > 30)
                 netSize = "NONE";
 
-            resMaskeTextView.setText(NetworkManager.toDecMask(mask));
-            dRsWildcardMaskeTextView.setText(NetworkManager.toDecWildCardMask(mask));
+            resMaskeTextView.setText(NetzwerkManager.todecmask(mask));
+            dRsWildcardMaskeTextView.setText(NetzwerkManager.toDecWildCardMaske(mask));
             dResMaskenCIDRTextView.setText(getString(R.string.slash_mask, mask));
             dResNetGrösseTextView.setText(netSize);
-            dResMaskeBinTextView.setText(NetworkManager.toBinOctets(NetworkManager.toIntMask(mask)));
-            dResWildcardMaskeBinTextView.setText(NetworkManager.toBinOctets(NetworkManager.toIntWildcardMask(mask)));
+            dResMaskeBinTextView.setText(NetzwerkManager.toBinOctet(NetzwerkManager.toIntMaske(mask)));
+            dResWildcardMaskeBinTextView.setText(NetzwerkManager.toBinOctet(NetzwerkManager.toIntWildcardMaske(mask)));
 
         }catch (Exception e){
             Log.e("Exception", Log.getStackTraceString(e));
@@ -65,7 +65,7 @@ public class MaskeFragment extends Fragment {
 
         List<String> mMaskList = new ArrayList<>();
         for (int mask =0; mask<33; mask++){
-            mMaskList.add(NetworkManager.toDecMask(mask));
+            mMaskList.add(NetzwerkManager.todecmask(mask));
         }
         Context  context= getContext();
         if (context != null){
